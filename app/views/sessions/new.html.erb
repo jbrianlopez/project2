@@ -1,19 +1,29 @@
-<h1>Sessions#new</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+  </head>
+  <body>
+    <div class = "container">
+    <h1>Welcome back</h1>
 
-<%= form_tag sessions_path do %>
-<div class="field">
-  <%= label_tag :email %>
-  <%= text_field_tag :email %>
-</div>
+    <%= form_tag sessions_path do %>
+    <div class="field">
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
+    </div>
 
-<div class="field">
-  <%= label_tag :password %>
-  <%= text_field_tag :password %>
-</div>
+    <div class="field">
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </div>
 
-<div class="actions">
-    <%= submit_tag "Sign In" %>
-  </div>
-  <% end %>
-  
-<p>Find me in app/views/sessions/new.html.erb</p>
+    <div class="actions">
+        <%= submit_tag "Sign In" %>
+      </div>
+      <% end %>
+    </div>
+  </body>
+</html>

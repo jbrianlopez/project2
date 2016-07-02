@@ -2,21 +2,49 @@
 <html>
   <head>
     <title>Project2</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <%= csrf_meta_tags %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
   </head>
+    <body>
+      <header class= "navbar boo" role = "navigation">
+        <div class="navbar-inner">
+          <div class="container">
+            <div id="logo" class="navbar-brand">  </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <% if user_logged_in? %>
+                Hello <%= current_user.email %>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to '<i class="material-icons md-24 orange600">create</i>'.html_safe, new_user_post_path(current_user) %></li>
+                    <li><%= link_to '<i class="material-icons md-24 orange600">exit_to_app</i>'.html_safe, sign_out_path, method: :delete %></li>
+                    <li><form class="searchform center has-feedback" action="<%= home_path %>" method="get" >
+                     <%= text_field_tag :search, params[:search], class: "searchfield", placeholder: "Search" %>    <span class="icon">
+                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                       </span>
+                     </form>
+                    </li>
+                  </ul>
+                    <% else %>
+                  <ul class="nav navbar-nav pull-right">
+                     <% if !(current_page?(sign_in_path)) %>
+                      <li><form class="searchform center has-feedback" action="<%= home_path %>" method="get" >
+                        <%= text_field_tag :search, params[:search], class: "searchfield" %>
+                      </li>
+                      <li><%= link_to '<i class="material-icons md-24 orange600">vpn_key</i>'.html_safe, sign_in_path %></li>
+                      <li><%= link_to '<i class="material-icons md-24 orange600">face</i>'.html_safe, sign_up_path %></li>
+                      <% end %>
+                  </ul>
+                  <% end %>
 
-  <body>
+            </div>
+          </div>
+        </div>
+      </header>
+      <%= yield %>
+    </body>
 
-
-<% flash.each do |name, message| %>
-  <div class="flash-message flash_message-<%= name %>">
-    <%= message %>
-  </div>
-  <% end %>
-    <%= yield %>
-  </body>
 </html>

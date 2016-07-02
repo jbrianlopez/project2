@@ -1,46 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
 
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class = "container">
 
-<h1>Everything!@#</h1>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
+      <div class="panel panel-default">
+      <% @posts.each do |post| %>
+      <div class="panel-heading">
 
-<% if user_logged_in? %>
-<h3> hello, <%= current_user.email%> </h3>
-<ul class="nav navbar-nav navbar-right">
-<%= link_to "Sign Out", sign_out_path, method: :delete %>
-<%= link_to 'New Post', new_user_post_path(current_user) %>
-<% else %>
-<%= link_to "Sign In", sign_in_path %>
-<%= link_to 'Sign Up', new_user_path %>
-<% end %>
-</nav>
-</div>
-</nav>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <div class="body">
-      <th>Body</th>
+      <h3 class="panel-title heading"><%= link_to post.title, user_post_path(post.user, post) %>
+      <h5><%= link_to post.user.email, user_posts_path(post.user) %></h5>
+      <%= post.created_at %>
+      </h3>
+      </div>
+      <div class="panel-body bottomspace">
+        <%= link_to post.body, user_post_path(post.user, post) %>
+      </div>
+      <% end %>
+      </div>
     </div>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody class = "posts">
-    <% @posts.each do |post| %>
-      <tr class = "post">
-        <td><%= link_to post.title, user_post_path(post.user, post) %></td>
-        <td><%= link_to post.body, user_post_path(post.user, post) %></td>
-        <td><%= link_to post.user.email, user_posts_path(post.user) %></td>
-        <% if current_user == post.user %>
-        <td><%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+    <div class = "share">
+    <%= facebook_button %>
+  </div>
+  </body>
+</form>
+</html>

@@ -1,31 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
 
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Password digest</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<h1>Welcome</h1>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.password_digest %></td>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Password digest</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+            <td><%= link_to 'Show', user %></td>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.password_digest %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-  <td><%= link_to 'Sign Up', sign_up_path %></td>
-  <td><%= link_to 'Sign In', sign_in_path %></td>
-<%= link_to 'New User', new_user_path %>
+  </body>
+</html>

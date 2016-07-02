@@ -18,6 +18,7 @@ end
   # GET /users/new
   def new
     @user = User.new
+    puts @user.inspect
   end
 
   # GET /users/1/edit
